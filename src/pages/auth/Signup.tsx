@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from "@/assets/landingpage/logo.png";
 import hero_bg from "@/assets/landingpage/hero_bg.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth_dec_1 from "@/assets/auth/signup1_decor.png";
 import auth_dec_2 from "@/assets/auth/signup_decor.svg";
 import Gradienttext from "@/components/ui/GradientText";
@@ -17,6 +17,7 @@ interface FormErrors {
 }
 
 export default function SignUpPage() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
         bio: "",
@@ -131,6 +132,7 @@ export default function SignUpPage() {
             );
             if (error) newErrors[key as keyof FormErrors] = error;
         });
+        navigate("/dashboard");
 
         setErrors(newErrors);
         setTouched(

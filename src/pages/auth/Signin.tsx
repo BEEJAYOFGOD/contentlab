@@ -12,92 +12,94 @@ interface FormErrors {
 }
 
 export default function SignInPage() {
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
+     const navigate = useNavigate();
+     const [formData, setFormData] = useState({
+         email: "",
+         password: "",
+     });
 
-    const [errors, setErrors] = useState<FormErrors>({});
-    const [touched, setTouched] = useState<Record<string, boolean>>({});
+     const [errors, setErrors] = useState<FormErrors>({});
+     const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-    const validateField = (name: string, value: string): string => {
-        switch (name) {
-            case "email":
-                if (!value.trim()) return "Email is required";
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                    return "Please enter a valid email";
-                }
-                return "";
+     const validateField = (name: string, value: string): string => {
+         switch (name) {
+             case "email":
+                 if (!value.trim()) return "Email is required";
+                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                     return "Please enter a valid email";
+                 }
+                 return "";
 
-            case "password":
-                if (!value) return "Password is required";
-                if (value.length < 8)
-                    return "Password must be at least 8 characters";
-                if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
-                    return "Password must contain uppercase, lowercase, and number";
-                }
-                return "";
+             case "password":
+                 if (!value) return "Password is required";
+                 if (value.length < 8)
+                     return "Password must be at least 8 characters";
+                 if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+                     return "Password must contain uppercase, lowercase, and number";
+                 }
+                 return "";
 
-            default:
-                return "";
-        }
-    };
+             default:
+                 return "";
+         }
+     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+         const { name, value } = e.target;
+         setFormData((prev) => ({
+             ...prev,
+             [name]: value,
+         }));
 
-        // Clear error when user starts typing
-        if (touched[name]) {
-            const error = validateField(name, value);
-            setErrors((prev) => ({
-                ...prev,
-                [name]: error,
-            }));
-        }
-    };
+         // Clear error when user starts typing
+         if (touched[name]) {
+             const error = validateField(name, value);
+             setErrors((prev) => ({
+                 ...prev,
+                 [name]: error,
+             }));
+         }
+     };
 
-    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setTouched((prev) => ({ ...prev, [name]: true }));
+     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+         const { name, value } = e.target;
+         setTouched((prev) => ({ ...prev, [name]: true }));
 
-        const error = validateField(name, value);
-        setErrors((prev) => ({
-            ...prev,
-            [name]: error,
-        }));
-    };
+         const error = validateField(name, value);
+         setErrors((prev) => ({
+             ...prev,
+             [name]: error,
+         }));
+     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+     const handleSubmit = (e: React.FormEvent) => {
+         e.preventDefault();
+         navigate("/dashboard");
 
-        // Validate all fields
-        const newErrors: FormErrors = {};
-        Object.keys(formData).forEach((key) => {
-            const error = validateField(
-                key,
-                formData[key as keyof typeof formData]
-            );
-            if (error) newErrors[key as keyof FormErrors] = error;
-        });
+         // Validate all fields
+         const newErrors: FormErrors = {};
+         Object.keys(formData).forEach((key) => {
+             const error = validateField(
+                 key,
+                 formData[key as keyof typeof formData]
+             );
+             if (error) newErrors[key as keyof FormErrors] = error;
+         });
 
-        setErrors(newErrors);
-        setTouched(
-            Object.keys(formData).reduce(
-                (acc, key) => ({ ...acc, [key]: true }),
-                {}
-            )
-        );
+         setErrors(newErrors);
+         setTouched(
+             Object.keys(formData).reduce(
+                 (acc, key) => ({ ...acc, [key]: true }),
+                 {}
+             )
+         );
 
-        // If no errors, submit
-        if (Object.keys(newErrors).length === 0) {
-            console.log("Form submitted:", formData);
-            // Add your API call here
-        }
-    };
+         // If no errors, submit
+         if (Object.keys(newErrors).length === 0) {
+             console.log("Form submitted:", formData);
+             // Add your API call here
+         }
+     };
 
     const getInputClassName = (fieldName: string) => {
         const baseClass =
