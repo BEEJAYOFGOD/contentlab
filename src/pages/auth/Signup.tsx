@@ -160,23 +160,23 @@ export default function SignUpPage() {
     };
 
     return (
-        <div className="relative z-10 min-h-screen overflow-hidden ">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+        <div className="relative min-h-screen overflow-hidden ">
+            <div className="grid relative grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Left side - Branding */}
                 <div
-                    className="hidden lg:flex rounded-0 flex-col border-none items-center justify-center p-12 h-screen  relative overflow-hidden bg-cover"
+                    className="hidden lg:flex rounded-0 h-screen flex-col border-none items-center justify-center p-12   relative overflow-hidden bg-cover"
                     style={{ backgroundImage: `url(${hero_bg})` }}
                 >
                     <img
                         src={auth_dec_1}
                         alt="auth decorative image"
-                        className="fixed left-0 bottom-0 w-[600px]"
+                        className="absolute left-0 bottom-0 w-[600px]"
                     />
 
                     <img
                         src={auth_dec_2}
                         alt="auth decorative image"
-                        className="fixed top-0  left-150 w-[800px] z-10000"
+                        className="fixed top-0  left-[23%] w-[600px]"
                     />
                     {/* Logo */}
                     <div>
@@ -185,10 +185,10 @@ export default function SignUpPage() {
                 </div>
 
                 {/* Right side - Sign up form */}
-                <div className="p-8 lg:p-12 flex flex-col  justify-center">
+                <div className="p-8 lg:p-12 flex flex-col z-9  justify-center">
                     <Gradienttext
                         content="Get Started"
-                        prop={"!font-extrabold !text-7xl"}
+                        prop={"!font-extrabold !text-5xl"}
                     />
                     <p className="text-gray-600 mb-8">
                         Welcome to ContentLab. Setup Your Profile.
@@ -212,24 +212,7 @@ export default function SignUpPage() {
                             )}
                         </div>
 
-                        <div>
-                            <input
-                                type="text"
-                                name="bio"
-                                placeholder="Bio"
-                                value={formData.bio}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                className={getInputClassName("bio")}
-                            />
-                            {touched.bio && errors.bio && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.bio}
-                                </p>
-                            )}
-                        </div>
-
-                        <div>
+                        {/* <div>
                             <input
                                 type="url"
                                 name="twitterUrl"
@@ -244,8 +227,8 @@ export default function SignUpPage() {
                                     {errors.twitterUrl}
                                 </p>
                             )}
-                        </div>
-
+                        </div> */}
+                        {/*
                         <div>
                             <input
                                 type="url"
@@ -261,7 +244,7 @@ export default function SignUpPage() {
                                     {errors.tiktokUrl}
                                 </p>
                             )}
-                        </div>
+                        </div> */}
 
                         <div>
                             <input

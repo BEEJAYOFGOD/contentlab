@@ -128,7 +128,7 @@ export default function SignInPage() {
                     <img
                         src={auth_dec_2}
                         alt="auth decorative image"
-                        className="fixed top-0  left-150 w-[800px] z-10000"
+                        className="fixed top-0  left-100 w-[600px] z-10000"
                     />
                     {/* Logo */}
                     <div>
@@ -140,7 +140,7 @@ export default function SignInPage() {
                 <div className="p-8 lg:p-12 flex flex-col  justify-center">
                     <Gradienttext
                         content="ContentLab Creator"
-                        prop={"!font-extrabold !text-7xl"}
+                        prop={"!font-extrabold !text-4xl"}
                     />
 
                     <p className="text-gray-600 mb-8">
