@@ -132,7 +132,7 @@ export default function SignUpPage() {
             );
             if (error) newErrors[key as keyof FormErrors] = error;
         });
-        navigate("/dashboard");
+
 
         setErrors(newErrors);
         setTouched(
@@ -146,6 +146,7 @@ export default function SignUpPage() {
         if (Object.keys(newErrors).length === 0) {
             console.log("Form submitted:", formData);
             // Add your API call here
+                    navigate("/dashboard");
         }
     };
 
